@@ -1,0 +1,5 @@
+.pf-wrap table.printTab tbody tr td{ padding:5px; line-height:1.5; font-size:1.5em; font-family:simsun; color:#000;}
+.pf-wrap table.printTab tbody tr td.bl{ border-top:#ccc 1px dashed;}
+.pf-wrap table.printTab tbody tr td.f18{ font-size:2em; font-weight:bold;}
+.pf-wrap .f12{ font-size:1em; font-family:simsun; color:#000;}
+.pf-wrap .f30{ font-size:2.5em; text-align:center; font-family:simsun; color:#000;}

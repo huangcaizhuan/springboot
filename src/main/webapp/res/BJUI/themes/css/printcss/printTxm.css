@@ -1,0 +1,4 @@
+.txmwrap{width:100%;height:130px;margin:10px auto;text-align:center;}
+.txmwrap img{display:block;max-width:100%;height:auto;margin:0 auto;padding-top:0px;margin-bottom: 2px;}
+/*.txmwrap p{ color:#000;width:100%;height:18px;overflow:hidden;margin-top:5px;margin-bottom: 5px;}*/
+.txmwrap p{font:500 12px/12px 'SimHei';color:#000;width:100%;height:15px; overflow:;margin-top:3px;}

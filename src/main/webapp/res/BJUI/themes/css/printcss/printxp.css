@@ -1,0 +1,10 @@
+/*print*/
+.prtDiv{ width:100%; margin:0 auto;}
+.prtDiv .dhr{ border-bottom:#333 1px dashed; margin:5px 0; position:relative;}
+.prtDiv .dhr:after{ border-top:#333 1px dashed; content:""; display:block; height:1px;}
+.prtDiv .dhr span{ font-size:12px; display:block; background:#fff; width:70px; text-align:center; position:absolute; left:50%; margin:-7px 0 0 -35px; font-family:Verdana,simsun;}
+table.printTab thead tr th, table.printTab tbody tr td{ line-height:1.2; font-size:12px; font-family:Verdana,simsun; color:#000;}
+table.printTab.bl{ border-top:#333 1px dashed; margin-top:3px; padding-top:3px;}
+table.printTab thead tr th{ font-weight:normal;}
+table.printTab tbody tr td{ padding:3px 0;}
+table.printTab .f1b{ font-size:14px; font-weight:bold;}

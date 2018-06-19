@@ -1,0 +1,10 @@
+.pf-wrap table{ border-collapse:collapse;}
+.pf-wrap table tr th, .pf-wrap table tr td{ padding:5px 0; line-height:1.5; font-size:14px; font-family:simsun; color:#000;}
+.pf-wrap table tr th.pf-tit{ text-align:center; font-size:20px; padding:10px 0; position:relative;}
+.pf-wrap table tr th.pf-tit span{ font-size:20px; position:absolute;font-weight:normal;}
+.pf-wrap table tr th.pf-tit span.thspan-left{ left:0;}
+.pf-wrap table tr th.pf-tit span.thspan-right{ right:0;}
+table.pf-bordered tr th, table.pf-bordered tr td{ padding:5px; border:#000 1px solid; text-align:center;}
+table.pf-bordered tfoot tr td{ font-weight:bold;}
+table.txtleft tr td{ text-align:left;}
+table.mt10{ margin-top:10px;}
