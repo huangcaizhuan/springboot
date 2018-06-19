@@ -14,7 +14,13 @@ public class IndexController {
 
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request) {
-		System.out.println("wwwwwwwwwwww");
-		return "index";
+		
+		return "index/index";
+	}
+	
+	@RequestMapping("/manageIndex")
+	public String manageIndex(HttpServletRequest request) {
+		
+		return "index/manageIndex";
 	}
 }
