@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.mapper.manage.FunctionMapper">
+  <resultMap id="BaseResultMap" type="com.boot.model.manage.Function">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="SUP_ID" jdbcType="DECIMAL" property="supId" />
+    <result column="ORDER_LEVEL" jdbcType="DECIMAL" property="orderLevel" />
+    <result column="PAGE" jdbcType="VARCHAR" property="page" />
+    <result column="CREATE_TIMESTAMP" jdbcType="DATE" property="createTimestamp" />
+    <result column="CATE_LEVEL" jdbcType="DECIMAL" property="cateLevel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, CODE, SUP_ID, ORDER_LEVEL, PAGE, CREATE_TIMESTAMP, CATE_LEVEL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_MANAGE_FUCNTION
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from TB_MANAGE_FUCNTION
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.boot.model.manage.Function">
+    insert into TB_MANAGE_FUCNTION (ID, NAME, CODE, 
+      SUP_ID, ORDER_LEVEL, PAGE, 
+      CREATE_TIMESTAMP, CATE_LEVEL)
+    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{supId,jdbcType=DECIMAL}, #{orderLevel,jdbcType=DECIMAL}, #{page,jdbcType=VARCHAR}, 
+      #{createTimestamp,jdbcType=DATE}, #{cateLevel,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.boot.model.manage.Function">
+    insert into TB_MANAGE_FUCNTION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="code != null">
+        CODE,
+      </if>
+      <if test="supId != null">
+        SUP_ID,
+      </if>
+      <if test="orderLevel != null">
+        ORDER_LEVEL,
+      </if>
+      <if test="page != null">
+        PAGE,
+      </if>
+      <if test="createTimestamp != null">
+        CREATE_TIMESTAMP,
+      </if>
+      <if test="cateLevel != null">
+        CATE_LEVEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="supId != null">
+        #{supId,jdbcType=DECIMAL},
+      </if>
+      <if test="orderLevel != null">
+        #{orderLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="page != null">
+        #{page,jdbcType=VARCHAR},
+      </if>
+      <if test="createTimestamp != null">
+        #{createTimestamp,jdbcType=DATE},
+      </if>
+      <if test="cateLevel != null">
+        #{cateLevel,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.boot.model.manage.Function">
+    update TB_MANAGE_FUCNTION
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="supId != null">
+        SUP_ID = #{supId,jdbcType=DECIMAL},
+      </if>
+      <if test="orderLevel != null">
+        ORDER_LEVEL = #{orderLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="page != null">
+        PAGE = #{page,jdbcType=VARCHAR},
+      </if>
+      <if test="createTimestamp != null">
+        CREATE_TIMESTAMP = #{createTimestamp,jdbcType=DATE},
+      </if>
+      <if test="cateLevel != null">
+        CATE_LEVEL = #{cateLevel,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boot.model.manage.Function">
+    update TB_MANAGE_FUCNTION
+    set NAME = #{name,jdbcType=VARCHAR},
+      CODE = #{code,jdbcType=VARCHAR},
+      SUP_ID = #{supId,jdbcType=DECIMAL},
+      ORDER_LEVEL = #{orderLevel,jdbcType=DECIMAL},
+      PAGE = #{page,jdbcType=VARCHAR},
+      CREATE_TIMESTAMP = #{createTimestamp,jdbcType=DATE},
+      CATE_LEVEL = #{cateLevel,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>
