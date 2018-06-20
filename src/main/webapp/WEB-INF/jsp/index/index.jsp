@@ -392,7 +392,7 @@ function changeCompany(btn){
                             	<ul class="menu-items" data-tit="${item.name }" data-faicon="cogs">
                                 	<c:forEach var="iitem" items="${list}">
                                 	<c:if test="${iitem.supId == item.id }">
-                                		<li><a href="${baseUrl}/${iitem.page}" data-options="{id:'${iitem..id }', faicon:''}">${iitem.name }</a></li>
+                                		<li><a href="${baseUrl}/${iitem.page}" data-options="{id:'${iitem.id }', faicon:''}">${iitem.name }</a></li>
                                 	</c:if>
                                 	</c:forEach>
                             	</ul>
