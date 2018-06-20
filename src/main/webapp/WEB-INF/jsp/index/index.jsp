@@ -386,6 +386,18 @@ function changeCompany(btn){
                                 <li><a href="${baseUrl}/shop/userWallet.jspx" data-options="{id:'userWallet', faicon:''}">电子钱包</a></li>
                                 <li><a href="${baseUrl}/shop/withdrawCashApplyList.jspx" data-options="{id:'withdrawCashApplyList', faicon:''}">提现记录</a></li>
                             </ul>
+                            
+                            <c:forEach var="item" items="${list}">
+                            <c:if test="${item.cateLevel == 1 }">
+                            	<ul class="menu-items" data-tit="${item.name }" data-faicon="cogs">
+                                	<c:forEach var="iitem" items="${list}">
+                                	<c:if test="${iitem.supId == item.id }">
+                                		<li><a href="${baseUrl}/${iitem.page}" data-options="{id:'${iitem..id }', faicon:''}">${iitem.name }</a></li>
+                                	</c:if>
+                                	</c:forEach>
+                            	</ul>
+                            </c:if>
+                            </c:forEach>
                         </div>
                     </li>
                 </ul>

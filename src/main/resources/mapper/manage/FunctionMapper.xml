@@ -125,4 +125,11 @@
       CATE_LEVEL = #{cateLevel,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+  
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_MANAGE_FUCNTION
+    where 1=1 ORDER BY ORDER_LEVEL ASC
+  </select>
 </mapper>

@@ -2,17 +2,23 @@ package com.boot.mapper.manage;
 
 import com.boot.model.manage.Function;
 import java.math.BigDecimal;
+import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
 public interface FunctionMapper {
-    int deleteByPrimaryKey(BigDecimal id);
+	public int deleteByPrimaryKey(BigDecimal id);
 
-    int insert(Function record);
+	public int insert(Function record);
 
-    int insertSelective(Function record);
+	public int insertSelective(Function record);
 
-    Function selectByPrimaryKey(BigDecimal id);
+	public Function selectByPrimaryKey(BigDecimal id);
 
-    int updateByPrimaryKeySelective(Function record);
+	public int updateByPrimaryKeySelective(Function record);
 
-    int updateByPrimaryKey(Function record);
+	public int updateByPrimaryKey(Function record);
+    
+	public List<Function> selectAll();
 }
