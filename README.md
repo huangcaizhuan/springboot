@@ -1,2 +1,2 @@
-# springbootJsp
-SpringBoot+MyBatis+Mysql+jsp+Maven
+# springboot
+SpringBoot+MyBatis+Oracle+jsp+Maven
