@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.mapper.manage.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.boot.model.manage.Role">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.boot.model.manage.Role">
+    <result column="POPEDOM_JSON" jdbcType="CLOB" property="popedomJson" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME
+  </sql>
+  <sql id="Blob_Column_List">
+    POPEDOM_JSON
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TB_MANAGE_ROLE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from TB_MANAGE_ROLE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.boot.model.manage.Role">
+    insert into TB_MANAGE_ROLE (ID, NAME, POPEDOM_JSON
+      )
+    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{popedomJson,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.boot.model.manage.Role">
+    insert into TB_MANAGE_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="popedomJson != null">
+        POPEDOM_JSON,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomJson != null">
+        #{popedomJson,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.boot.model.manage.Role">
+    update TB_MANAGE_ROLE
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomJson != null">
+        POPEDOM_JSON = #{popedomJson,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.boot.model.manage.Role">
+    update TB_MANAGE_ROLE
+    set NAME = #{name,jdbcType=VARCHAR},
+      POPEDOM_JSON = #{popedomJson,jdbcType=CLOB}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boot.model.manage.Role">
+    update TB_MANAGE_ROLE
+    set NAME = #{name,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

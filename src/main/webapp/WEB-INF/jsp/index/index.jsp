@@ -9,7 +9,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>XXXXXXXXXXXX管理后台</title>
+<title>喵星人管理后台</title>
 <!-- bootstrap - css -->
 <link href="${baseResPath}/BJUI/themes/css/bootstrap.css" rel="stylesheet">
 <!-- core - css -->
