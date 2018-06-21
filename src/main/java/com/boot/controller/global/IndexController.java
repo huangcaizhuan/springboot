@@ -1,4 +1,4 @@
-package com.boot.controller;
+package com.boot.controller.global;
 
 import java.util.List;
 
@@ -16,6 +16,7 @@ import com.boot.model.manage.Function;
 @Controller
 @ComponentScan({"com.boot.service"})
 @MapperScan("com.boot.mapper")
+@RequestMapping("/manage")
 public class IndexController {
 
 	@Autowired
