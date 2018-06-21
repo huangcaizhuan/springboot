@@ -12,9 +12,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boot.impl.manage.ManagerServiceImpl;
 import com.boot.tools.util.validate.ValidateCode;
+
+import net.sf.json.JSONObject;
 
 @Controller
 @ComponentScan({"com.boot.service"})
@@ -25,18 +28,39 @@ public class LoginController {
 	@Autowired
 	private ManagerServiceImpl  managerService;
 	
+	/**
+	 * 登录页面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request,HttpServletResponse response) {
 		
 		return "index/login";
 	}
 	
+	/**
+	 * 登录验证码
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping("/validateCode")
-	public String validateCode(HttpServletRequest request,HttpServletResponse response) throws IOException {
-		
-		return ValidateCode.getValidateCode(request, response);
+	@ResponseBody
+	public JSONObject validateCode(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		JSONObject obj = new JSONObject();
+		obj.put("img", ValidateCode.getValidateCode(request, response));
+		return obj;
 	}
 	
+	/**
+	 * 登录请求
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value ="/loginAjax",method = RequestMethod.POST)
 	public String loginAjax(HttpServletRequest request,HttpServletResponse response) {
 		

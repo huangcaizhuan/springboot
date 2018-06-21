@@ -49,7 +49,20 @@ $(function() {
 	
 	//刷新验证码
 	function login_reloadImage(){
-		$('#login_validateCodeId').attr('src','${baseUrl}/manage/validateCode');
+		//$('#login_validateCodeId').attr('src','${baseUrl}/manage/validateCode');
+		
+		$.ajax({
+			url:'${baseUrl}/manage/validateCode',
+			type:'get',
+			async:false,
+			dataType:'json',
+			success:function(response){
+				$('#login_validateCodeId').attr('src',response.img);
+			},
+			error:function(response){
+				return false;
+			}
+		}); 
 	}
 	//页面初始化验证码
 	login_reloadImage();

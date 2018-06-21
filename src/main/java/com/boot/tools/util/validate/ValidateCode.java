@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -91,11 +93,22 @@ public class ValidateCode {
 		response.setContentType("image/jpeg"); 
 		
 		//将图像输出到Servlet输出流中。
-		ServletOutputStream sos = response.getOutputStream(); 
+		/*ServletOutputStream sos = response.getOutputStream(); 
 		ImageIO.write(buffImg, "jpeg", sos); 
-		sos.close(); 
+		sos.close();
+		return null;*/
 		
-		return null;
+		// 创建编码对象
+		Base64.Encoder base64 = Base64.getEncoder();
+		// 创建字符流
+		ByteArrayOutputStream bs = new ByteArrayOutputStream();
+		// 写入字符流
+		ImageIO.write(buffImg, "jpg", bs);
+		// 转码成字符串
+		String imgsrc = base64.encodeToString(bs.toByteArray());
+	
+		return "data:image/jpg;base64,"+imgsrc;
+		
 	}
 	
 	public static Color getRandColor(int fc,int bc){
