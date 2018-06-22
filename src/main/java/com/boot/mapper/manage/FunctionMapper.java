@@ -20,5 +20,9 @@ public interface FunctionMapper {
 
 	public int updateByPrimaryKey(Function record);
     
+	/**
+	 * 获取所有功能信息
+	 * @return
+	 */
 	public List<Function> selectAll();
 }

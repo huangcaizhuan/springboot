@@ -2,11 +2,14 @@ package com.boot.startupRunner;
 
 import java.math.BigDecimal;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import com.boot.impl.manage.FunctionServiceImpl;
 import com.boot.impl.manage.ManagerServiceImpl;
 import com.boot.model.manage.Manager;
 import com.boot.tools.util.security.MD5;
@@ -23,6 +26,8 @@ public class BootStartupRunner implements CommandLineRunner{
 	
 	@Autowired
 	private ManagerServiceImpl  managerService;
+	@Autowired
+	private FunctionServiceImpl  functionService;
 
 	@Override
 	public void run(String... arg0) throws Exception {
@@ -38,6 +43,7 @@ public class BootStartupRunner implements CommandLineRunner{
 			manger.setId(new BigDecimal("100"));
 			managerService.save(manger);
 		}
+		functionService.initFunction();
 		
 		System.out.println("执行完成....................");
 	}

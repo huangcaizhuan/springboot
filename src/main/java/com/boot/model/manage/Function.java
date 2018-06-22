@@ -2,7 +2,6 @@ package com.boot.model.manage;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class Function implements Serializable {
     private BigDecimal id;
@@ -17,7 +16,7 @@ public class Function implements Serializable {
 
     private String page;
 
-    private Date createTimestamp;
+    private String createTimestamp;
 
     private BigDecimal cateLevel;
 
@@ -71,19 +70,19 @@ public class Function implements Serializable {
         this.page = page == null ? null : page.trim();
     }
 
-    public Date getCreateTimestamp() {
-        return createTimestamp;
-    }
-
-    public void setCreateTimestamp(Date createTimestamp) {
-        this.createTimestamp = createTimestamp;
-    }
-
     public BigDecimal getCateLevel() {
         return cateLevel;
     }
 
-    public void setCateLevel(BigDecimal cateLevel) {
+    public String getCreateTimestamp() {
+		return createTimestamp;
+	}
+
+	public void setCreateTimestamp(String createTimestamp) {
+		this.createTimestamp = createTimestamp;
+	}
+
+	public void setCateLevel(BigDecimal cateLevel) {
         this.cateLevel = cateLevel;
     }
 }

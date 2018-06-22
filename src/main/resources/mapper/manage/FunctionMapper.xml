@@ -8,7 +8,7 @@
     <result column="SUP_ID" jdbcType="DECIMAL" property="supId" />
     <result column="ORDER_LEVEL" jdbcType="DECIMAL" property="orderLevel" />
     <result column="PAGE" jdbcType="VARCHAR" property="page" />
-    <result column="CREATE_TIMESTAMP" jdbcType="DATE" property="createTimestamp" />
+    <result column="CREATE_TIMESTAMP" jdbcType="VARCHAR" property="createTimestamp" />
     <result column="CATE_LEVEL" jdbcType="DECIMAL" property="cateLevel" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -130,6 +130,6 @@
     select 
     <include refid="Base_Column_List" />
     from TB_MANAGE_FUCNTION
-    where 1=1 ORDER BY ORDER_LEVEL ASC
+    where 1=1 order by  CATE_LEVEL asc,ORDER_LEVEL asc
   </select>
 </mapper>

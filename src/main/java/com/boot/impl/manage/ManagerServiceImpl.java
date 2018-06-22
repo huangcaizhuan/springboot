@@ -36,7 +36,7 @@ public class ManagerServiceImpl implements ManagerService{
 		
 		if(record == null || record.getName() == null || StringUtils.isEmpty(record.getName()) 
 				|| StringUtils.isEmpty(record.getPassword()) ){
-			logger.error("modify:参数对象为空");
+			logger.error("save:参数对象为空");
 			throw new RuntimeException("参数对象为空");
 		}
 		
