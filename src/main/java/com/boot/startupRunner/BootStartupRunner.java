@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.boot.impl.manage.ManagerServiceImpl;
 import com.boot.model.manage.Manager;
+import com.boot.tools.util.security.MD5;
 
 
 /**
@@ -32,7 +33,8 @@ public class BootStartupRunner implements CommandLineRunner{
 		if(manger == null) {
 			manger = new Manager();
 			manger.setName("超级管理员");
-			manger.setPassword("a123456");
+			manger.setUserName("system");
+			manger.setPassword(MD5.digest("a123456"));
 			manger.setId(new BigDecimal("100"));
 			managerService.save(manger);
 		}

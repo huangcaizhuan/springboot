@@ -30,7 +30,7 @@ public class ValidateCode {
 			'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
 			'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 	
-	public static String getValidateCode(HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public static String getValidateCode(HttpServletRequest request,HttpServletResponse response,String sessionName) throws IOException {
 		
 		//定义图像buffer
 		BufferedImage buffImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB); 
@@ -83,7 +83,7 @@ public class ValidateCode {
 		
 		HttpSession session = request.getSession();
 		// 将四位数字的验证码保存到Session中。
-		session.setAttribute("validateCode", randomCode.toString().toLowerCase());
+		session.setAttribute(sessionName, randomCode.toString().toLowerCase());
 		
 		// 禁止图像缓存。
 		response.setHeader("Pragma", "no-cache"); 

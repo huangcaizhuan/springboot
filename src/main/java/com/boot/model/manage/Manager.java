@@ -18,6 +18,8 @@ public class Manager implements Serializable {
 
     private String password;
 
+    private String userName;
+
     private static final long serialVersionUID = 1L;
 
     public BigDecimal getId() {
@@ -74,5 +76,13 @@ public class Manager implements Serializable {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 }

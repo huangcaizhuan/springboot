@@ -1,13 +1,14 @@
 -- Create table
 create table TB_MANAGE_MANAGER
 (
-  id       NUMBER not null,
-  name     VARCHAR2(50),
-  email    VARCHAR2(50),
-  tel      VARCHAR2(11),
-  status   VARCHAR2(2),
-  roleid   NUMBER,
-  password VARCHAR2(50)
+  id        NUMBER not null,
+  name      VARCHAR2(50),
+  email     VARCHAR2(50),
+  tel       VARCHAR2(11),
+  status    VARCHAR2(2),
+  role_id   NUMBER,
+  password  VARCHAR2(50),
+  user_name VARCHAR2(50)
 )
 tablespace USERS
   pctfree 10
@@ -16,6 +17,7 @@ tablespace USERS
   storage
   (
     initial 64K
+    next 1M
     minextents 1
     maxextents unlimited
   );
@@ -33,10 +35,12 @@ comment on column TB_MANAGE_MANAGER.tel
   is '电话';
 comment on column TB_MANAGE_MANAGER.status
   is '状态: -1冻结, 1正常';
-comment on column TB_MANAGE_MANAGER.roleid
+comment on column TB_MANAGE_MANAGER.role_id
   is '角色ID';
 comment on column TB_MANAGE_MANAGER.password
   is '密码';
+comment on column TB_MANAGE_MANAGER.user_name
+  is '登录名';
 -- Create/Recreate primary, unique and foreign key constraints 
 alter table TB_MANAGE_MANAGER
   add constraint PK_MANAGE_MANAGER primary key (ID)
@@ -44,4 +48,11 @@ alter table TB_MANAGE_MANAGER
   tablespace USERS
   pctfree 10
   initrans 2
-  maxtrans 255;
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );

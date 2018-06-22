@@ -9,9 +9,10 @@
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
     <result column="ROLE_ID" jdbcType="DECIMAL" property="roleId" />
     <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, NAME, EMAIL, TEL, STATUS, ROLE_ID, PASSWORD
+    ID, NAME, EMAIL, TEL, STATUS, ROLE_ID, PASSWORD, USER_NAME
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     select 
@@ -26,10 +27,10 @@
   <insert id="insert" parameterType="com.boot.model.manage.Manager">
     insert into TB_MANAGE_MANAGER (ID, NAME, EMAIL, 
       TEL, STATUS, ROLE_ID, 
-      PASSWORD)
+      PASSWORD, USER_NAME)
     values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{tel,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{roleId,jdbcType=DECIMAL}, 
-      #{password,jdbcType=VARCHAR})
+      #{password,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.boot.model.manage.Manager">
     insert into TB_MANAGE_MANAGER
@@ -55,6 +56,9 @@
       <if test="password != null">
         PASSWORD,
       </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -77,6 +81,9 @@
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -101,6 +108,9 @@
       <if test="password != null">
         PASSWORD = #{password,jdbcType=VARCHAR},
       </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=DECIMAL}
   </update>
@@ -111,7 +121,35 @@
       TEL = #{tel,jdbcType=VARCHAR},
       STATUS = #{status,jdbcType=VARCHAR},
       ROLE_ID = #{roleId,jdbcType=DECIMAL},
-      PASSWORD = #{password,jdbcType=VARCHAR}
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+  
+  <!-- 按条件获取信息 -->
+  <select id="selectByCoditions" parameterType="com.boot.model.manage.Manager" resultMap="BaseResultMap">
+     select <include refid="Base_Column_List" /> from TB_MANAGE_MANAGER where 1=1  
+      <if test="name != null">
+        and NAME = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="email != null">
+        and EMAIL = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="tel != null">
+        and TEL = #{tel,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null">
+        and STATUS = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="roleId != null">
+        and ROLE_ID = #{roleId,jdbcType=DECIMAL}
+      </if>
+      <if test="password != null">
+        and PASSWORD = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="userName != null">
+        and USER_NAME = #{userName,jdbcType=VARCHAR}
+      </if>
+      order by ID desc
+  </select>
 </mapper>

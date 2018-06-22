@@ -53,7 +53,7 @@ $(function() {
 		
 		$.ajax({
 			url:'${baseUrl}/manage/validateCode',
-			type:'get',
+			type:'post',
 			async:false,
 			dataType:'json',
 			success:function(response){
@@ -74,16 +74,17 @@ $(function() {
 		var code = $('#inputCode').val();
 		var isEqual = false;
 		$.ajax({
-			url:'${baseUrl}/manage/checkValidateCodeAjax.jspx',
-			type:'get',
+			url:'${baseUrl}/manage/checkValidateCodeAjax',
+			type:'post',
 			async:false,
-			data:{inputCode:code,id:Math.random()},
+			data:{validateCode:code},
 			dataType:'json',
 			success:function(response){
-				if(response.isEqual){
+				if(response.success){
 					isEqual = true;
 				}else{
 					isEqual = false;
+					loginErrorMsg(response.msg);
 					login_reloadImage();
 				}
 			},
@@ -111,26 +112,25 @@ $(function() {
 			return false;
 		}
 		if(!checkImgCode()){
-			alert('验证码错误!');
 			return false;
 		}
 		$("#login_ok").attr("disabled", true).val('登录中..');
 		var accountStr = $('#login_username').val();
 		var password = $('#login_password').val();
 		$.ajax({
-			url:'${baseUrl}/manage/loginAjax.jspx?randomId='+Math.random(),
-			type:'get',
+			url:'${baseUrl}/manage/loginAjax',
+			type:'post',
 			data:{accountStr:accountStr, password:password},
 			dataType:'json',
 			async:false,
 			success:function(response){
-				if(response.isFail){
+				if(!response.success){
 					loginErrorMsg(response.msg);
 					$("#login_ok").attr("disabled", false).val('登录');
 					login_reloadImage();
 					return false;
 				}else{
-					window.location = '${baseUrl}/manage/index.jspx';
+					window.location = '${baseUrl}/manage/index';
 				}
 			},
 			error:function(response){
