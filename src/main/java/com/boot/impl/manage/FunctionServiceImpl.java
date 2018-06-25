@@ -1,7 +1,9 @@
 package com.boot.impl.manage;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -14,7 +16,6 @@ import com.boot.mapper.manage.FunctionMapper;
 import com.boot.model.manage.Function;
 import com.boot.service.manage.FunctionService;
 
-import net.sf.json.JSONObject;
 
 @Service("functionService")
 @ComponentScan({"com.boot.mapper.*"})
@@ -165,6 +166,35 @@ public class FunctionServiceImpl implements FunctionService{
 		}
 		
 		return functionMapper.selectByPrimaryKey(function.getId());
+	}
+
+	@Override
+	public Boolean delete(BigDecimal id) {
+		if(id == null) {
+			logger.error("delete:id为空");
+			throw new RuntimeException("id为空");
+		}
+		Function function = functionMapper.selectByPrimaryKey(id);
+		if(function == null ) {
+			logger.error("delete:功能不存在");
+			throw new RuntimeException("功能不存在");
+		}
+		
+		Map<String,Object> conditions = new HashMap<String,Object>();
+		conditions.put("supId", id);
+		
+		List<Function> list = functionMapper.selectByConditions(conditions);
+		if(list != null && list.size() > 0 && list.get(0) != null) {
+			logger.error("delete:该功能存在二级功能");
+			throw new RuntimeException("该功能存在二级功能，不能删除");
+		}
+		
+		int count = functionMapper.deleteByPrimaryKey(id);
+		if(count == 0 ) {
+			logger.error("delete:删除失败");
+			throw new RuntimeException("删除失败");
+		}
+		return Boolean.TRUE;
 	}
 
 }

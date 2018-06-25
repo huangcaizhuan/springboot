@@ -178,4 +178,31 @@ public class FunctionController {
 		obj.put("msg", "修改成功");
 		return obj;
 	}
+
+	/**
+	 * 删除功能请求
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/delFunctionAjax")
+	@ResponseBody
+	public JSONObject delFunctionAjax(HttpServletRequest request) {
+		JSONObject obj = new JSONObject(); 
+		
+		if(StringUtils.isEmpty(request.getParameter("id"))) {
+			obj.put("success", false);
+			obj.put("msg", "参数id为空");
+			return obj;
+		}
+		
+		Boolean done = functionService.delete(new BigDecimal(request.getParameter("id")));
+		if(done == null || done.equals(Boolean.FALSE)) {
+			obj.put("success", false);
+			obj.put("msg", "删除失败");
+			return obj;
+		}
+		obj.put("success", true);
+		obj.put("msg", "删除成功");
+		return obj;
+	}	
 }

@@ -5,7 +5,7 @@
 <%-- <%@ taglib uri="http://lol.redScarf.org/lol/tags" prefix="lol"%> --%>
 <jsp:include page="/WEB-INF/jsp/common/domain.jsp"></jsp:include>
 <script>
-function commmentList_chagecallback(json){
+function functionList_chagecallback(json){
 	if(!json.success){
 		$.CurrentNavtab.alertmsg('error', json.msg);
 		return;
@@ -53,7 +53,7 @@ function commmentList_chagecallback(json){
                	  <input type="text" value="${name}" name="name" size="20"> --%>
                  <!--  <button type="submit" class="btn-default" data-icon="search">查询</button> -->
                   
-                  <a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">刷新</a>
+                  <!-- <a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">刷新</a> -->
               </div>
             </div>
             <div class="pull-right">
@@ -82,6 +82,7 @@ function commmentList_chagecallback(json){
         		<tr data-id="${item.id }">
 	            	<td align="center">
 	            		<button class="btn btn-sm btn-blue" data-url="./modifyFunction?id=${item.id }"  data-id="dialog-mask" data-mask="true" data-toggle="dialog" data-width="700" data-height="470"  data-icon="edit" data-title="编辑功能">编辑</button>
+	            		<button class="btn btn-sm btn-red" data-url="./delFunctionAjax?id=${item.id }"  data-toggle="doajax" data-confirm-msg="确定要删除吗？" data-callback="functionList_chagecallback" data-icon="remove">删除</button>
 	            	</td>
         			<td>${item.name}</td>
         			<td align="center">${item.code}</td>
@@ -101,6 +102,7 @@ function commmentList_chagecallback(json){
                   	<tr data-id="${iitem.id }">
 		            	<td align="center">
 	            			<button class="btn btn-sm btn-blue" data-url="./modifyFunction?id=${iitem.id }"  data-id="dialog-mask" data-mask="true" data-toggle="dialog" data-width="700" data-height="470"  data-icon="edit" data-title="编辑功能">编辑</button>
+	            			<button class="btn btn-sm btn-red" data-url="./delFunctionAjax?id=${iitem.id }"  data-toggle="doajax" data-confirm-msg="确定要删除吗？" data-callback="functionList_chagecallback" data-icon="remove">删除</button>
 	            		</td>
 	        			<td>
 	        				<span class="bw10"></span><span class="bw10"></span>

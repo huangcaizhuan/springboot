@@ -3,6 +3,7 @@ package com.boot.mapper.manage;
 import com.boot.model.manage.Function;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -32,5 +33,12 @@ public interface FunctionMapper {
 	 * @return
 	 */
 	public Function selectByName(String name);
+	
+	/**
+	 * 按条件查询
+	 * @param conditions
+	 * @return
+	 */
+	public List<Function> selectByConditions(Map<String,Object> conditions);
 	
 }

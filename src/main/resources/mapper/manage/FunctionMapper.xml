@@ -141,4 +141,33 @@
     from TB_MANAGE_FUCNTION
     where NAME = #{name,jdbcType=VARCHAR}
   </select>
+  
+  <!-- 按名条件查询 -->
+  <select id="selectByConditions" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_MANAGE_FUCNTION where 1=1 
+    <if test="name != null">
+        and NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        and CODE = #{code,jdbcType=VARCHAR}
+      </if>
+      <if test="supId != null">
+        and SUP_ID = #{supId,jdbcType=DECIMAL}
+      </if>
+      <if test="orderLevel != null">
+        and ORDER_LEVEL = #{orderLevel,jdbcType=DECIMAL}
+      </if>
+      <if test="page != null">
+        and PAGE = #{page,jdbcType=VARCHAR}
+      </if>
+      <if test="createTimestamp != null">
+        and CREATE_TIMESTAMP = #{createTimestamp,jdbcType=DATE}
+      </if>
+      <if test="cateLevel != null">
+        and CATE_LEVEL = #{cateLevel,jdbcType=DECIMAL}
+      </if>
+      order by  CATE_LEVEL asc,ORDER_LEVEL asc
+  </select>
 </mapper>

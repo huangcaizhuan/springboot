@@ -37,4 +37,11 @@ public interface FunctionService {
 	 * @return
 	 */
 	public Function modify(Function function);
+	
+	/**
+	 * 删除功能
+	 * @param id
+	 * @return
+	 */
+	public Boolean  delete(BigDecimal id);
 }
