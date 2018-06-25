@@ -25,4 +25,12 @@ public interface FunctionMapper {
 	 * @return
 	 */
 	public List<Function> selectAll();
+	
+	/**
+	 * 按名称获取信息
+	 * @param name
+	 * @return
+	 */
+	public Function selectByName(String name);
+	
 }

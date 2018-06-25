@@ -121,7 +121,7 @@ public class FunctionController {
 			return null;
 		}
 		
-		Function supFunction = functionService.getById(function.getId());
+		Function supFunction = functionService.getById(function.getSupId());
 		
 		request.setAttribute("function", function);
 		request.setAttribute("supFunction", supFunction);

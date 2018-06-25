@@ -47,6 +47,11 @@ public class FunctionServiceImpl implements FunctionService{
 			throw new RuntimeException("功能编码为空");
 		}
 		
+		if(functionMapper.selectByName(function.getName()) != null){
+			logger.error("save:该名称已存在");
+			throw new RuntimeException("该名称已存在");
+		}
+		
 		if(function.getOrderLevel() == null) {
 			function.setOrderLevel(new BigDecimal(20));
 		}
@@ -129,9 +134,16 @@ public class FunctionServiceImpl implements FunctionService{
 			function.setOrderLevel(new BigDecimal(20));
 		}
 		
-		if(functionMapper.selectByPrimaryKey(function.getId()) == null) {
+		Function po = functionMapper.selectByPrimaryKey(function.getId());
+		if( po== null) {
 			logger.error("modify:对象不存在");
 			throw new RuntimeException("对象不存在");
+		}
+		
+		Function nameFun = functionMapper.selectByName(function.getName());
+		if(nameFun != null && !function.getId().equals(nameFun.getId())){
+			logger.error("modify:该名称已存在");
+			throw new RuntimeException("该名称已存在");
 		}
 		
 		Function supFun = null;

@@ -126,10 +126,19 @@
     where ID = #{id,jdbcType=DECIMAL}
   </update>
   
+  <!-- 查询所有功能 -->
   <select id="selectAll"  resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from TB_MANAGE_FUCNTION
     where 1=1 order by  CATE_LEVEL asc,ORDER_LEVEL asc
+  </select>
+  
+  <!-- 按名称查询 -->
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_MANAGE_FUCNTION
+    where NAME = #{name,jdbcType=VARCHAR}
   </select>
 </mapper>
