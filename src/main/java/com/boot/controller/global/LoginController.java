@@ -122,4 +122,21 @@ public class LoginController {
 		jsonReturn.put("success", true);
 		return jsonReturn;
 	}
+	
+	/**
+	 * 登录请求
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value ="/logoutAjax",method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject logoutAjax(HttpServletRequest request,HttpServletResponse response) {
+		JSONObject jsonReturn = DefaultJSON.getDefaultJSON();
+		
+		request.getSession().removeAttribute("loginManager");
+		request.getSession().removeAttribute("managerId");
+		
+		return jsonReturn;
+	}
 }

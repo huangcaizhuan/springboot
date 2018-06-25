@@ -27,6 +27,9 @@ public class IndexController {
 		
 		List<Function> list = functionService.getAllFunction();
 		request.setAttribute("list", list);
+		
+		request.setAttribute("manager", request.getSession().getAttribute("loginManager"));
+		
 		return "index/index";
 	}
 	

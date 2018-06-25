@@ -200,7 +200,7 @@ $(function() {
 })
 
 function logout_callback(json){
-	//window.location = '${baseUrl}/shop/login.jspx';
+	window.location = '${baseUrl}/manage/login';
 }
 
 //菜单-事件
@@ -351,14 +351,14 @@ function changeCompany(btn){
                     	<li><a href="javascript:;" data-url="${baseUrl}/shop/changepwd.jspx" data-id="dialog-mask" data-mask="true" data-toggle="dialog" data-width="500" data-height="290">&nbsp;<span class="glyphicon glyphicon-lock"></span> 修改密码&nbsp;</a></li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><c:if test="${not empty companyVo.name }">当前：${companyVo.name }</c:if><span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><c:if test="${not empty manager }">${manager.name }</c:if><!-- <span class="caret"></span> --></a>
+                    <%-- <ul class="dropdown-menu" role="menu">
                     	<c:forEach items="${companyList }" var="company">
                     		<li onclick="changeCompany(this)" data-id="${company.id }" data-name="${company.name }" class="company" data-toggle="doajax"><a href="javascript:;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${company.name }</a></li>
                     	</c:forEach>
-                    </ul>
+                    </ul> --%>
                 </li>
-                <li><a href="javascript:;" class="red" data-url="${baseUrl}/shop/logout.jspx"  data-toggle="doajax" data-callback="logout_callback" class="red">&nbsp;<span class="glyphicon glyphicon-off"></span> 注销登陆</a></li>
+                <li><a href="javascript:;" class="red" data-url="${baseUrl}/manage/logoutAjax"  data-toggle="doajax" data-callback="logout_callback" class="red">&nbsp;<span class="glyphicon glyphicon-off"></span> 注销登陆</a></li>
             </ul>
         </nav>
         <div id="bjui-hnav" style="display:none">

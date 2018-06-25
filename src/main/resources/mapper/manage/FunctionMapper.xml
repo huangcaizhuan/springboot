@@ -12,7 +12,7 @@
     <result column="CATE_LEVEL" jdbcType="DECIMAL" property="cateLevel" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, NAME, CODE, SUP_ID, ORDER_LEVEL, PAGE, CREATE_TIMESTAMP, CATE_LEVEL
+    ID, NAME, CODE, SUP_ID, ORDER_LEVEL, PAGE, to_char(CREATE_TIMESTAMP, 'yyyy-mm-dd hh24:mi:ss')CREATE_TIMESTAMP, CATE_LEVEL
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     select 
