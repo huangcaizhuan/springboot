@@ -83,7 +83,7 @@ function commmentList_chagecallback(json){
 	            	<td align="center">
 	            		<button class="btn btn-sm btn-blue" data-url="./modifyFunction?id=${item.id }"  data-id="dialog-mask" data-mask="true" data-toggle="dialog" data-width="700" data-height="470"  data-icon="edit" data-title="编辑功能">编辑</button>
 	            	</td>
-        			<td align="center">${item.name}</td>
+        			<td>${item.name}</td>
         			<td align="center">${item.code}</td>
         			<td align="center">${item.orderLevel}</td>
         			<td align="center">${item.page}</td>
@@ -102,7 +102,7 @@ function commmentList_chagecallback(json){
 		            	<td align="center">
 	            			<button class="btn btn-sm btn-blue" data-url="./modifyFunction?id=${item.id }"  data-id="dialog-mask" data-mask="true" data-toggle="dialog" data-width="700" data-height="470"  data-icon="edit" data-title="编辑功能">编辑</button>
 	            		</td>
-	        			<td align="center">
+	        			<td>
 	        				<span class="bw10"></span><span class="bw10"></span>
 	        				${iitem.name}
 	        			</td>

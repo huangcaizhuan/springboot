@@ -5,14 +5,16 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.druid.util.StringUtils;
 import com.boot.mapper.manage.FunctionMapper;
 import com.boot.model.manage.Function;
 import com.boot.service.manage.FunctionService;
+
+import net.sf.json.JSONObject;
 
 @Service("functionService")
 @ComponentScan({"com.boot.mapper.*"})
@@ -29,7 +31,7 @@ public class FunctionServiceImpl implements FunctionService{
 	}
 
 	@Override
-	public Function save(Function function) {
+	public int save(Function function) {
 		if(function == null){
 			logger.error("save:参数对象为空");
 			throw new RuntimeException("参数对象为空");
@@ -38,6 +40,11 @@ public class FunctionServiceImpl implements FunctionService{
 		if(StringUtils.isEmpty(function.getName()) ) {
 			logger.error("save:功能名称为空");
 			throw new RuntimeException("功能名称为空");
+		}
+		
+		if(StringUtils.isEmpty(function.getCode()) ) {
+			logger.error("save:功能编码为空");
+			throw new RuntimeException("功能编码为空");
 		}
 		
 		if(function.getOrderLevel() == null) {
@@ -51,6 +58,7 @@ public class FunctionServiceImpl implements FunctionService{
 				logger.error("save:上级功能不存在");
 				throw new RuntimeException("上级功能不存在");
 			}
+			function.setCateLevel(supFun.getCateLevel().add(new BigDecimal(1)));
 		}else {
 			function.setCateLevel(new BigDecimal(1));
 		}
@@ -58,20 +66,10 @@ public class FunctionServiceImpl implements FunctionService{
 		int count = functionMapper.insertSelective(function);
 		if(count == 0) {
 			logger.error("save:保存失败");
-			throw new RuntimeException("上保存失败");
-		}
-		//function.setId(saveVo.getId());
-		
-		/*if(supFun != null) {
-			function.setCateLevel(supFun.getCateLevel().add(new BigDecimal(1)));
-			function.setCode(supFun.getCode()+"-"+saveVo.getId());
-		}else {
-			function.setCode(String.valueOf(saveVo.getId()));
+			throw new RuntimeException("保存失败");
 		}
 		
-		functionMapper.updateByPrimaryKeySelective(function);*/
-		
-		return null;
+		return count;
 	}
 
 	@Override
@@ -89,7 +87,7 @@ public class FunctionServiceImpl implements FunctionService{
 		if(function == null) {
 			function = new Function();
 			function.setCateLevel(new BigDecimal("1"));
-			function.setCode("1");
+			function.setCode("01");
 			function.setOrderLevel(new BigDecimal("100"));
 			function.setName("系统管理");
 			function.setId(new BigDecimal("1"));
@@ -99,7 +97,7 @@ public class FunctionServiceImpl implements FunctionService{
 		if(function2 == null) {
 			function2 = new Function();
 			function2.setCateLevel(new BigDecimal(2));
-			function2.setCode("1-2");
+			function2.setCode("0101");
 			function2.setSupId(new BigDecimal(1));
 			function2.setPage("manage/functionList");
 			function2.setOrderLevel(new BigDecimal("101"));
@@ -107,6 +105,54 @@ public class FunctionServiceImpl implements FunctionService{
 			function2.setId(new BigDecimal("2"));
 			functionMapper.insertSelective(function2);
 		}
+	}
+
+	@Override
+	public Function modify(Function function) {
+		if(function == null || function.getId() == null || 
+				function.getId().equals(new BigDecimal("0")) ){
+			logger.error("modify:参数对象为空");
+			throw new RuntimeException("参数对象为空");
+		}
+		
+		if(StringUtils.isEmpty(function.getName()) ) {
+			logger.error("modify:功能名称为空");
+			throw new RuntimeException("功能名称为空");
+		}
+		
+		if(StringUtils.isEmpty(function.getCode()) ) {
+			logger.error("modify:功能编码为空");
+			throw new RuntimeException("功能编码为空");
+		}
+		
+		if(function.getOrderLevel() == null) {
+			function.setOrderLevel(new BigDecimal(20));
+		}
+		
+		if(functionMapper.selectByPrimaryKey(function.getId()) == null) {
+			logger.error("modify:对象不存在");
+			throw new RuntimeException("对象不存在");
+		}
+		
+		Function supFun = null;
+		if(function.getSupId() != null) {
+			supFun = functionMapper.selectByPrimaryKey(function.getSupId());
+			if(supFun == null) {
+				logger.error("modify:上级功能不存在");
+				throw new RuntimeException("上级功能不存在");
+			}
+			function.setCateLevel(supFun.getCateLevel().add(new BigDecimal(1)));
+		}else {
+			function.setCateLevel(new BigDecimal(1));
+		}
+		
+		int count = functionMapper.updateByPrimaryKeySelective(function);
+		if(count == 0) {
+			logger.error("modify:修改失败");
+			throw new RuntimeException("修改失败");
+		}
+		
+		return functionMapper.selectByPrimaryKey(function.getId());
 	}
 
 }

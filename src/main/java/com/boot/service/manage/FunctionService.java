@@ -22,7 +22,7 @@ public interface FunctionService {
 	 * @param function
 	 * @return
 	 */
-	public Function  save(Function function);
+	public int  save(Function function);
 	
 	/**
 	 * 根据id获取
@@ -30,4 +30,11 @@ public interface FunctionService {
 	 * @return
 	 */
 	public Function getById(BigDecimal id);
+	
+	/**
+	 * 修改功能
+	 * @param id
+	 * @return
+	 */
+	public Function modify(Function function);
 }
