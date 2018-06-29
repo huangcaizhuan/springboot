@@ -127,10 +127,66 @@
   </update>
   
   <!-- 按条件获取信息 -->
-  <select id="selectByCoditions" parameterType="com.boot.model.manage.Manager" resultMap="BaseResultMap">
+  <select id="selectByConditions" parameterType="com.boot.model.manage.Manager" resultMap="BaseResultMap">
      select <include refid="Base_Column_List" /> from TB_MANAGE_MANAGER where 1=1  
       <if test="name != null">
         and NAME = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="email != null">
+        and EMAIL = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="tel != null">
+        and TEL = #{tel,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null">
+        and STATUS = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="roleId != null">
+        and ROLE_ID = #{roleId,jdbcType=DECIMAL}
+      </if>
+      <if test="password != null">
+        and PASSWORD = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="userName != null">
+        and USER_NAME = #{userName,jdbcType=VARCHAR}
+      </if>
+      order by ID desc
+  </select>
+  
+  <!-- 分页查询 -->
+  <select id="selectByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+  		SELECT * FROM  (  
+  			SELECT A.*, ROWNUM RN  FROM (SELECT * FROM TB_MANAGE_MANAGER) A  WHERE 1=1 
+  		  <if test="name != null">
+	        and NAME like #{name,jdbcType=VARCHAR}
+	      </if>
+	      <if test="email != null">
+	        and EMAIL = #{email,jdbcType=VARCHAR}
+	      </if>
+	      <if test="tel != null">
+	        and TEL = #{tel,jdbcType=VARCHAR}
+	      </if>
+	      <if test="status != null">
+	        and STATUS = #{status,jdbcType=VARCHAR}
+	      </if>
+	      <if test="roleId != null">
+	        and ROLE_ID = #{roleId,jdbcType=DECIMAL}
+	      </if>
+	      <if test="password != null">
+	        and PASSWORD = #{password,jdbcType=VARCHAR}
+	      </if>
+	      <if test="userName != null">
+	        and USER_NAME = #{userName,jdbcType=VARCHAR}
+	      </if>
+  		AND ROWNUM &lt;= #{endNum} ) 
+  	 WHERE RN >= #{beginNum }  order by ID desc
+  </select>
+  
+  <!-- 获取总条数 -->
+  <select id="getCountByConditions" parameterType="java.util.Map" resultType="java.lang.Integer">
+     select count(1) from TB_MANAGE_MANAGER where 1=1  
+      <if test="name != null">
+        and NAME like #{name,jdbcType=VARCHAR}
       </if>
       <if test="email != null">
         and EMAIL = #{email,jdbcType=VARCHAR}

@@ -56,3 +56,24 @@ alter table TB_MANAGE_MANAGER
     minextents 1
     maxextents unlimited
   );
+  
+  
+  -- Create sequence 
+create sequence TB_MANAGE_MANAGER_ID_SEQ
+minvalue 100
+maxvalue 999999999999999999999999
+start with 101
+increment by 1
+cache 20;
+
+
+
+create or replace trigger tr_tb_manage_manager
+  before insert
+  on TB_MANAGE_MANAGER 
+  for each row
+when(new.id is null)
+begin
+ select  TB_MANAGE_MANAGER_ID_SEQ.nextval into:NEW.ID from dual;
+end ;
+
