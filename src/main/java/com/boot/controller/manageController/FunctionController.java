@@ -121,10 +121,12 @@ public class FunctionController {
 			return null;
 		}
 		
-		Function supFunction = functionService.getById(function.getSupId());
+		if(function.getSupId() != null) {
+			Function supFunction = functionService.getById(function.getSupId());
+			request.setAttribute("supFunction", supFunction);
+		}
 		
 		request.setAttribute("function", function);
-		request.setAttribute("supFunction", supFunction);
 		return "manage/modifyFunction";
 	}
 	
