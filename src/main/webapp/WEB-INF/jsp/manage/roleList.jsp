@@ -33,8 +33,8 @@
 	                <td align="center">${stus.index + 1 }</td>
 	                <td align="center">${item.name }</td>
 	                <td align="center">
-	                	<button class="btn btn-sm btn-blue" data-url="./modifyRole.jspx?id=${item.id }&pageIndex=${ pageModel.pageIndex}" data-id="qxpz-dialog-mask" data-mask="true" data-toggle="dialog" data-width="500" data-height="290" data-icon="edit" data-title="角色【${item.name }】信息编辑">编辑</button>
-	                	<button class="btn btn-sm btn-blue" data-url="./deleteRoleAjax.jspx?id=${item.id }" data-toggle="doajax" data-confirm-msg="确定要删除选中角色吗？" class="btn btn-red" data-icon="remove"  data-callback="roleList_chagecallback">删除角色</button>
+	                	<button class="btn btn-sm btn-blue" data-url="./modifyRole?roleId=${item.id }&pageCurrent=${pageCurrent}" data-id="qxpz-dialog-mask" data-mask="true" data-toggle="dialog" data-width="500" data-height="290" data-icon="edit" data-title="角色【${item.name }】信息编辑">编辑</button>
+	                	<button class="btn btn-sm btn-blue" data-url="./deleteRoleAjax?roleId=${item.id }" data-toggle="doajax" data-confirm-msg="确定要删除选中角色吗？" class="btn btn-red" data-icon="remove"  data-callback="roleList_chagecallback">删除角色</button>
 	                	<button class="btn btn-sm btn-blue" data-url="./popedomList?roleId=${item.id}&pageCurrent=${pageCurrent}" data-id="szqx-dialog-mask" data-mask="true" data-toggle="dialog" data-width="1000" data-height="500" data-icon="edit" data-title="分配【${item.name }】权限">分配权限</button>
 	                </td>
 	            </tr>

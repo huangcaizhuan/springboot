@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,7 +40,7 @@ public class RoleController {
 	
 
 	/**
-	 * 管理员列表
+	 * 角色列表
 	 * @param request
 	 * @return
 	 */
@@ -100,6 +99,83 @@ public class RoleController {
 		returnJson.put("msg", "增加成功");
 		return returnJson;
 	}
+	
+	/**
+	 * 修改角色 页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/modifyRole")
+	public String modifyRole(HttpServletRequest request) {
+		
+		String id = request.getParameter("roleId");
+		if(StringUtils.isEmpty(id)) {
+			return null;
+		}
+		
+		Role role = roleService.getById(new BigDecimal(id));
+		if(role == null) {
+			return null;
+		}
+		request.setAttribute("role", role);
+		return "manage/modifyRole";
+	}
+	
+	/**
+	 * 修改角色ajax
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/modifyRoleAjax")
+	@ResponseBody
+	public JSONObject modifyRoleAjax(HttpServletRequest request) {
+		
+		JSONObject returnJson = DefaultJSON.getDefaultJSON();
+		if(StringUtils.isEmpty(request.getParameter("name")) ||
+				StringUtils.isEmpty(request.getParameter("roleId"))) {
+			returnJson.put("success", false);
+			returnJson.put("msg", "参数为空");
+			return returnJson;
+		}
+		
+		Role role = new Role();
+		role.setId(new BigDecimal(request.getParameter("roleId")));
+		role.setName(request.getParameter("name"));
+		roleService.modify(role);
+		
+		returnJson.put("success", true);
+		returnJson.put("msg", "修改成功");
+		return returnJson;
+	}
+	
+	/**
+	 * 删除角色ajax
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/deleteRoleAjax")
+	@ResponseBody
+	public JSONObject deleteRoleAjax(HttpServletRequest request) {
+		
+		JSONObject returnJson = DefaultJSON.getDefaultJSON();
+		if(StringUtils.isEmpty(request.getParameter("roleId"))) {
+			returnJson.put("success", false);
+			returnJson.put("msg", "参数为空");
+			return returnJson;
+		}
+		
+		int count = roleService.deleteById(new BigDecimal(request.getParameter("roleId")));
+		if(count == 0) {
+			returnJson.put("success", false);
+			returnJson.put("msg", "删除失败 ");
+			return returnJson;
+		}
+		
+		returnJson.put("success", true);
+		returnJson.put("msg", "删除成功");
+		return returnJson;
+	}
+	
 	
 	/**
 	 * 角色分配 页面

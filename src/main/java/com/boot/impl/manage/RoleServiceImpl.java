@@ -60,4 +60,9 @@ public class RoleServiceImpl implements RoleService{
 		return roleMapper.getCount();
 	}
 
+	@Override
+	public int deleteById(BigDecimal id) {
+		return roleMapper.deleteByPrimaryKey(id);
+	}
+
 }

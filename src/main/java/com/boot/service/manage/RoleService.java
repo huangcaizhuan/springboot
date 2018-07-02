@@ -30,6 +30,13 @@ public interface RoleService {
 	public int modify(Role role);
 	
 	/**
+	 * 删除
+	 * @param id
+	 * @return
+	 */
+	public int deleteById(BigDecimal id);
+	
+	/**
 	 * 分页查询
 	 * @param conditions
 	 * @return
