@@ -6,11 +6,11 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.druid.util.StringUtils;
 import com.boot.mapper.manage.ManagerMapper;
 import com.boot.model.manage.Manager;
 import com.boot.service.manage.ManagerService;
@@ -132,6 +132,12 @@ public class ManagerServiceImpl implements ManagerService{
 	public List<Manager> getListPager(Map<String, Object> conditions) {
 		if(conditions == null) {
 			return null;
+		}
+		if(conditions.get("beginNum") == null) {
+			conditions.put("beginNum", 1);
+		}
+		if(conditions.get("endNum") == null) {
+			conditions.put("endNum", managerMapper.getCountByConditions(conditions));
 		}
 		return managerMapper.selectByPage(conditions);
 	}

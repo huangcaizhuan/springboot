@@ -33,3 +33,24 @@ alter table TB_MANAGE_ROLE
   pctfree 10
   initrans 2
   maxtrans 255;
+
+  
+  
+  -- Create sequence 
+create sequence TB_MANAGE_ROLE_ID_SEQ
+minvalue 1
+maxvalue 99999999999999999999999
+start with 1
+increment by 1
+cache 10;
+
+
+
+create or replace trigger tr_tb_manage_role
+  before insert
+  on tb_manage_role 
+  for each row
+when(new.id is null)
+begin
+   select  TB_MANAGE_ROLE_ID_SEQ.nextval into:NEW.ID from dual;
+end ;

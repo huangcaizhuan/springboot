@@ -80,4 +80,17 @@
     set NAME = #{name,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+  
+  <!-- 分页查询 -->
+  <select id="selectByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+  		SELECT * FROM  (  
+  			SELECT A.*, ROWNUM RN  FROM (SELECT * FROM TB_MANAGE_ROLE) A  WHERE 1=1 
+  		AND ROWNUM &lt;= #{endNum} ) 
+  	 WHERE RN >= #{beginNum }  order by ID desc
+  </select>
+  
+  <!-- 获取总条数 -->
+  <select id="getCount"  resultType="java.lang.Integer">
+     select count(1) from TB_MANAGE_ROLE where 1=1  order by ID desc
+  </select>
 </mapper>
