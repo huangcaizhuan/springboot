@@ -17,7 +17,7 @@
 		.alert-dismissible .close{ position:relative; top:-2px; color:#f00;}
 		.alert-dismissible .close span{ font-size:21px;}
 	</style>
-    <h1 class="text-center" style="padding:50px 0">欢迎来到喵星人管理后台</h1>
+    <h1 class="text-center" style="padding:50px 0">欢迎来到窝窝宠物管理后台</h1>
      <div class="clearfix" style="padding:100px 50px;">
     	<div class="col-md-3">
     		<a href="./orderList.jspx?bdate=${currentTime }&edate=${currentTime}" data-toggle="navtab" data-id="orderList" data-title="销售订单">

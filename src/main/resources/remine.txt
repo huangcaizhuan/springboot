@@ -1,0 +1,11 @@
+1、数据库规范
+	（1）表名：tb+模块名+功能名。
+	 	例：商品表tb_goods_goods,商品分类表tb_goods_category
+	 （2）触发器：tr+表名。 例：tr_tb_goods_goods
+	 （3）序列：表名+列名+seq。 例：tb_goods_goods_id_seq
+	 （4）主键：pk+表名。例：pk_tb_goods_goods
+2、包规范
+	层次名+模块名+功能名
+3、类名规范
+	一般：功能名+层次名
+	实体：功能名

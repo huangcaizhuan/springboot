@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.mapper.goods.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.boot.model.goods.Goods">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="PRICE" jdbcType="DECIMAL" property="price" />
+    <result column="CATEGORY_ID" jdbcType="DECIMAL" property="categoryId" />
+    <result column="CATEGORY_NAME" jdbcType="VARCHAR" property="categoryName" />
+    <result column="RECOMMEND" jdbcType="DECIMAL" property="recommend" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.boot.model.goods.Goods">
+    <result column="DESCRIPTION" jdbcType="CLOB" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, PRICE, CATEGORY_ID, CATEGORY_NAME, RECOMMEND
+  </sql>
+  <sql id="Blob_Column_List">
+    DESCRIPTION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TB_GOODS_GOODS
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from TB_GOODS_GOODS
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.boot.model.goods.Goods">
+    insert into TB_GOODS_GOODS (ID, NAME, PRICE, 
+      CATEGORY_ID, CATEGORY_NAME, RECOMMEND, 
+      DESCRIPTION)
+    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{categoryId,jdbcType=DECIMAL}, #{categoryName,jdbcType=VARCHAR}, #{recommend,jdbcType=DECIMAL}, 
+      #{description,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.boot.model.goods.Goods">
+    insert into TB_GOODS_GOODS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="categoryId != null">
+        CATEGORY_ID,
+      </if>
+      <if test="categoryName != null">
+        CATEGORY_NAME,
+      </if>
+      <if test="recommend != null">
+        RECOMMEND,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=DECIMAL},
+      </if>
+      <if test="categoryName != null">
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="recommend != null">
+        #{recommend,jdbcType=DECIMAL},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.boot.model.goods.Goods">
+    update TB_GOODS_GOODS
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="categoryId != null">
+        CATEGORY_ID = #{categoryId,jdbcType=DECIMAL},
+      </if>
+      <if test="categoryName != null">
+        CATEGORY_NAME = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="recommend != null">
+        RECOMMEND = #{recommend,jdbcType=DECIMAL},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.boot.model.goods.Goods">
+    update TB_GOODS_GOODS
+    set NAME = #{name,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=DECIMAL},
+      CATEGORY_ID = #{categoryId,jdbcType=DECIMAL},
+      CATEGORY_NAME = #{categoryName,jdbcType=VARCHAR},
+      RECOMMEND = #{recommend,jdbcType=DECIMAL},
+      DESCRIPTION = #{description,jdbcType=CLOB}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boot.model.goods.Goods">
+    update TB_GOODS_GOODS
+    set NAME = #{name,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=DECIMAL},
+      CATEGORY_ID = #{categoryId,jdbcType=DECIMAL},
+      CATEGORY_NAME = #{categoryName,jdbcType=VARCHAR},
+      RECOMMEND = #{recommend,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

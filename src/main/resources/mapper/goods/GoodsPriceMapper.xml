@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.mapper.goods.GoodsPriceMapper">
+  <resultMap id="BaseResultMap" type="com.boot.model.goods.GoodsPrice">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="GOODS_ID" jdbcType="DECIMAL" property="goodsId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="PRICE" jdbcType="DECIMAL" property="price" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, GOODS_ID, NAME, PRICE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_GOODS_PRICE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from TB_GOODS_PRICE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.boot.model.goods.GoodsPrice">
+    insert into TB_GOODS_PRICE (ID, GOODS_ID, NAME, 
+      PRICE)
+    values (#{id,jdbcType=DECIMAL}, #{goodsId,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.boot.model.goods.GoodsPrice">
+    insert into TB_GOODS_PRICE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="goodsId != null">
+        GOODS_ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.boot.model.goods.GoodsPrice">
+    update TB_GOODS_PRICE
+    <set>
+      <if test="goodsId != null">
+        GOODS_ID = #{goodsId,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boot.model.goods.GoodsPrice">
+    update TB_GOODS_PRICE
+    set GOODS_ID = #{goodsId,jdbcType=DECIMAL},
+      NAME = #{name,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

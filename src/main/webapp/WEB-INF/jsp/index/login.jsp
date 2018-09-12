@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>喵星人管理系统登录</title>
+<title>窝窝宠物管理系统登录</title>
 <script src="${baseResPath}/BJUI/js/jquery-1.7.2.min.js"></script>
 <script src="${baseResPath}/BJUI/js/jquery.cookie.js"></script>
 <script src="${baseResPath}/BJUI/js/sha256.js"></script>

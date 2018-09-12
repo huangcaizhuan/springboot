@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.mapper.goods.GoodsCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.boot.model.goods.GoodsCategory">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="CATE_LEVEL" jdbcType="DECIMAL" property="cateLevel" />
+    <result column="SUP_ID" jdbcType="DECIMAL" property="supId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, CODE, CATE_LEVEL, SUP_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_GOODS_CATEGORY
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from TB_GOODS_CATEGORY
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.boot.model.goods.GoodsCategory">
+    insert into TB_GOODS_CATEGORY (ID, NAME, CODE, 
+      CATE_LEVEL, SUP_ID)
+    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{cateLevel,jdbcType=DECIMAL}, #{supId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.boot.model.goods.GoodsCategory">
+    insert into TB_GOODS_CATEGORY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="code != null">
+        CODE,
+      </if>
+      <if test="cateLevel != null">
+        CATE_LEVEL,
+      </if>
+      <if test="supId != null">
+        SUP_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="cateLevel != null">
+        #{cateLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="supId != null">
+        #{supId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.boot.model.goods.GoodsCategory">
+    update TB_GOODS_CATEGORY
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="cateLevel != null">
+        CATE_LEVEL = #{cateLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="supId != null">
+        SUP_ID = #{supId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boot.model.goods.GoodsCategory">
+    update TB_GOODS_CATEGORY
+    set NAME = #{name,jdbcType=VARCHAR},
+      CODE = #{code,jdbcType=VARCHAR},
+      CATE_LEVEL = #{cateLevel,jdbcType=DECIMAL},
+      SUP_ID = #{supId,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>
