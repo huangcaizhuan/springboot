@@ -7,7 +7,8 @@ create table TB_GOODS_GOODS
   description   CLOB,
   category_id   NUMBER,
   category_name VARCHAR2(50),
-  recommend     NUMBER
+  recommend     NUMBER,
+  img_url       VARCHAR2(1000)
 )
 tablespace USERS
   pctfree 10
@@ -31,6 +32,8 @@ comment on column TB_GOODS_GOODS.category_name
   is '分类名称';
 comment on column TB_GOODS_GOODS.recommend
   is '推荐指数';
+comment on column TB_GOODS_GOODS.img_url
+  is '商品图片，|图片地址1||图片地址2||图片地址3||图片地址4|';
 -- Create/Recreate primary, unique and foreign key constraints 
 alter table TB_GOODS_GOODS
   add constraint PK_TB_GOODS_GOODS primary key (ID)

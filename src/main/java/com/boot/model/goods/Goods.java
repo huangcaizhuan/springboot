@@ -17,8 +17,10 @@ public class Goods implements Serializable {
     private BigDecimal recommend;
 
     private String description;
+    
+    private String imgUrl;
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
     public BigDecimal getId() {
         return id;
@@ -75,4 +77,19 @@ public class Goods implements Serializable {
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
+    
+    public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl == null ? null : imgUrl.trim();
+	}
+
+	@Override
+	public String toString() {
+		return "Goods [id=" + id + ", name=" + name + ", price=" + price + ", categoryId=" + categoryId
+				+ ", categoryName=" + categoryName + ", recommend=" + recommend + ", description=" + description
+				+ ", imgUrl=" + imgUrl + "]";
+	}
 }
